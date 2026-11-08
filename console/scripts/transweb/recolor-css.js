@@ -35,15 +35,16 @@ const TEAL = {
 
 // Source colour -> teal step
 const MAP = {
-    // Tailwind v3 `blue`
+    // Tailwind v3 `blue`. Mid/dark steps shift one shade darker: upstream puts white text on
+    // blue-500/600, and white on teal-500 is only ~3:1, while white on teal-600 is 4.97:1 (WCAG AA).
     '#eff6ff': 50,
     '#dbeafe': 100,
     '#bfdbfe': 200,
     '#93c5fd': 300,
     '#60a5fa': 400,
-    '#3b82f6': 500,
-    '#2563eb': 600,
-    '#1d4ed8': 700,
+    '#3b82f6': 600,
+    '#2563eb': 700,
+    '#1d4ed8': 800,
     '#1e40af': 800,
     '#1e3a8a': 900,
     '#172554': 950,
@@ -52,9 +53,9 @@ const MAP = {
     '#bad5f5': 200,
     '#8dbbef': 300,
     '#61a0e8': 400,
-    '#3485e2': 500,
-    '#1c6cc7': 600,
-    '#16539a': 700,
+    '#3485e2': 600,
+    '#1c6cc7': 700,
+    '#16539a': 800,
     '#103b6d': 800,
     '#092341': 900,
     // Tailwind v3 default `sky` (used by a few ember-ui hover states)
@@ -62,13 +63,13 @@ const MAP = {
     '#bae6fd': 200,
     '#7dd3fc': 300,
     '#38bdf8': 400,
-    '#0ea5e9': 500,
-    '#0284c7': 600,
-    '#0369a1': 700,
+    '#0ea5e9': 600,
+    '#0284c7': 700,
+    '#0369a1': 800,
     '#075985': 800,
     '#0c4a6e': 900,
     // Fleetbase logo blue
-    '#4391ea': 500,
+    '#4391ea': 600,
 };
 
 const hexToRgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
