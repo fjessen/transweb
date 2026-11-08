@@ -1,5 +1,5 @@
 app:
-  name: Fleetbase
+  name: Transweb
 common:
   new: Novo
   create: Criar
@@ -595,7 +595,7 @@ auth:
     success-message: Your email address has been updated.
     invalid-verification-code: This email change link is invalid or expired.
     title: Confirm email change
-    message-text: Confirm this change to update the login email for your Fleetbase account.
+    message-text: Confirm this change to update the login email for your Transweb account.
     form:
       code:
         label: Confirmation code
@@ -757,8 +757,8 @@ onboard:
       resend-email: Reenviar E-mail
       send-by-sms: Enviar por SMS
 install:
-  not-configured-title: Fleetbase is not installed or configured
-  not-configured-message: Complete setup from the Fleetbase CLI or application container, then reload this page once the database, migrations, and seed data are ready.
+  not-configured-title: Transweb is not installed or configured
+  not-configured-message: Complete setup from the Transweb CLI or application container, then reload this page once the database, migrations, and seed data are ready.
   running-locally-docs: See running locally docs
   cloud-docs: See cloud deployment docs
   refreshing: Installation complete, refreshing...
@@ -773,3 +773,8 @@ layout:
         view-profile: Ver perfil
         keyboard-shortcuts: Mostrar atalhos de teclado
         changelog: Registro de alterações
+
+transweb:
+  source-code: Código-fonte
+  legal: Legal
+  tagline: Logística, entregas e gestão de frotas para Moçambique

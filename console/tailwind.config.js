@@ -20,16 +20,27 @@ module.exports = {
                 DEFAULT: 'transparent',
             },
             colors: {
+                // Transweb brand palette (see /branding/assets/palette.json).
+                // `sky` is Fleetbase's primary UI scale, remapped to Transweb teal.
                 sky: {
-                    100: '#e6f0fb',
-                    200: '#bad5f5',
-                    300: '#8dbbef',
-                    400: '#61a0e8',
-                    500: '#3485e2',
-                    600: '#1c6cc7',
-                    700: '#16539a',
-                    800: '#103b6d',
-                    900: '#092341',
+                    50: '#F1FAF9',
+                    100: '#E3F5F4',
+                    200: '#B7E5E2',
+                    300: '#84D1CC',
+                    400: '#4BBAB3',
+                    500: '#1FA39C',
+                    600: '#087D7A',
+                    700: '#096E6D',
+                    800: '#065253',
+                    900: '#033637',
+                },
+                transweb: {
+                    navy: '#0B2A3C',
+                    'navy-light': '#0F3A52',
+                    teal: '#087D7A',
+                    'teal-light': '#3FC1B8',
+                    cyan: '#6FE7F2',
+                    amber: '#F2A900',
                 },
                 nightsky: {
                     100: '#0d2f57',

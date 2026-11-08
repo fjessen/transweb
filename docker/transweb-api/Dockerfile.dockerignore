@@ -1,0 +1,5 @@
+# Minimal build context for docker/transweb-api/Dockerfile
+*
+!docker/transweb-api/patch-strings.php
+!api/config/fleetbase.php
+!docker/transweb-api/frankenphp-worker.php

@@ -1,0 +1,88 @@
+# Transweb — hand-written Português (Moçambique) strings.
+# Dotted key: value. These win over values generated from pt-br by make-pt-mz.js.
+# Covers console strings that upstream pt-br is missing or left in English.
+app.name: Transweb
+common.close-and-save: Fechar e guardar
+common.your-profile: O seu perfil
+common.date-of-birth: Data de nascimento
+common.organization: Organização
+common.two-factor: Dois factores
+common.activity: Actividade
+common.phone: Telefone
+common.filter-by-field: Filtrar por {field}
+common.timezone: Fuso horário
+common.resource-actions: Acções de {resource}
+common.resource-location: Localização de {resource}
+common.changelog: Registo de alterações
+common.reload: Recarregar
+common.modal: Janela
+common.menu: Menu
+common.dropdown: Lista suspensa
+common.tooltip: Dica
+common.placeholder: Marcador
+common.avatar: Avatar
+common.link: Ligação
+common.banner: Faixa
+common.online: Online
+common.offline: Offline
+common.email: E-mail
+common.item: Item
+common.status: Estado
+common.total: Total
+common.meta: Metadados
+resource.country: País
+dashboard-widget-panel.filter-widgets: Procurar widgets…
+dashboard-widget-panel.no-widgets-match: Nenhum widget corresponde aos filtros.
+dashboard-widget-panel.tab-all: Todos
+dashboard-widget-panel.tab-default: Recomendados
+dashboard-widget-panel.tab-added: No painel
+dashboard-widget-panel.badge-default: Predefinido
+dashboard-widget-panel.add: Adicionar
+dashboard-widget-panel.add-another: Adicionar outro
+component.dashboard.create-to-customize-hint: Crie um painel para personalizar os widgets.
+console.admin.menu.platform-api-token: Token da API da plataforma
+console.admin.menu.socket: Socket
+console.admin.platform-api-token.title: Token da API da plataforma
+console.admin.platform-api-token.description: Gerir o token da API da plataforma usado por integrações de confiança para aceder a endpoints protegidos, como o directório de organizações.
+console.admin.platform-api-token.loading: A carregar o estado do token…
+console.admin.platform-api-token.status: Estado
+console.admin.platform-api-token.configured: Configurado
+console.admin.platform-api-token.not-configured: Não configurado
+console.admin.platform-api-token.last-rotated: Última renovação
+console.admin.platform-api-token.last-used: Última utilização
+console.admin.platform-api-token.never: Nunca
+console.admin.platform-api-token.generate-token: Gerar token
+console.admin.platform-api-token.rotate-token: Renovar token
+console.admin.platform-api-token.revoke-token: Revogar token
+console.admin.platform-api-token.one-time-warning: Copie este token agora. Não voltará a ser mostrado.
+console.admin.platform-api-token.rotate-confirm-title: Renovar o token da API da plataforma?
+console.admin.platform-api-token.rotate-warning: Renovar este token invalida de imediato as integrações que usam o token anterior.
+console.admin.platform-api-token.revoke-confirm-title: Revogar o token da API da plataforma?
+console.admin.platform-api-token.revoke-warning: Revogar desactiva o acesso por token aos endpoints protegidos da plataforma.
+console.admin.platform-api-token.generated: Token da API da plataforma gerado.
+console.admin.platform-api-token.rotated: Token da API da plataforma renovado.
+console.admin.platform-api-token.revoked: Token da API da plataforma revogado.
+console.admin.platform-api-token.copied: Token copiado para a área de transferência.
+console.admin.branding.logo-text: Logótipo
+console.admin.organizations.index.email-column: E-mail
+console.settings.index.logo: Logótipo
+modals.set-password.message: A sua conta foi criada a partir de um convite e ainda não tem palavra-passe. Defina uma agora para concluir a protecção da conta.
+modals.set-password.new-password: Nova palavra-passe
+modals.set-password.confirm-password: Confirmar palavra-passe
+modals.set-password.help-text: Introduza uma palavra-passe com pelo menos 6 caracteres para continuar.
+auth.confirm-email-change.success-message: O seu endereço de e-mail foi actualizado.
+auth.confirm-email-change.invalid-verification-code: Esta ligação de alteração de e-mail é inválida ou expirou.
+auth.confirm-email-change.title: Confirmar alteração de e-mail
+auth.confirm-email-change.message-text: Confirme esta alteração para actualizar o e-mail de acesso da sua conta Transweb.
+auth.confirm-email-change.form.code.label: Código de confirmação
+auth.confirm-email-change.form.code.help-text: O código de confirmação enviado para o seu e-mail.
+auth.confirm-email-change.form.submit-button: Confirmar alteração de e-mail
+auth.confirm-email-change.form.back-button: Voltar
+install.not-configured-title: O Transweb não está instalado ou configurado
+install.not-configured-message: Conclua a configuração a partir da CLI ou do contentor da aplicação e recarregue esta página quando a base de dados, as migrações e os dados iniciais estiverem prontos.
+install.running-locally-docs: Ver documentação de instalação local
+install.cloud-docs: Ver documentação de implementação na nuvem
+install.refreshing: Instalação concluída, a recarregar…
+transweb.source-code: Código-fonte
+transweb.legal: Avisos legais
+transweb.tagline: Logística, entregas e gestão de frotas para Moçambique

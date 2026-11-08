@@ -1,0 +1,19 @@
+{
+  "primary": {
+    "100": "#E3F5F4",
+    "200": "#B7E5E2",
+    "300": "#84D1CC",
+    "400": "#4BBAB3",
+    "500": "#1FA39C",
+    "600": "#087D7A",
+    "700": "#096E6D",
+    "800": "#065253",
+    "900": "#033637"
+  },
+  "navy": "#0B2A3C",
+  "amber": "#F2A900",
+  "contrast_white_on_600": 4.97,
+  "contrast_white_on_700": 6.06,
+  "contrast_navy_on_amber": 7.41,
+  "contrast_white_on_navy": 14.89
+}

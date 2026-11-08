@@ -1,0 +1,18 @@
+<div class="fleetbase-attribution-notice fleetbase-attribution-notice--{{or @placement 'standalone'}} transweb-attribution" ...attributes>
+    <span class="fleetbase-attribution-link transweb-attribution-brand">
+        {{#if this.companyName}}©&nbsp;{{this.year}}&nbsp;{{this.companyName}}{{else}}{{this.brand}}{{/if}}
+    </span>
+    {{#if this.appVersion}}
+        <span class="fleetbase-attribution-version">{{this.appVersion}}</span>
+    {{/if}}
+    <span class="fleetbase-attribution-separator" aria-hidden="true">·</span>
+    <a href="https://www.fleetbase.io" target="_blank" rel="noopener noreferrer" class="fleetbase-attribution-legal-link">Powered by Fleetbase</a>
+    {{#if this.sourceUrl}}
+        <span class="fleetbase-attribution-separator" aria-hidden="true">·</span>
+        <a href={{this.sourceUrl}} target="_blank" rel="noopener noreferrer" class="fleetbase-attribution-legal-link">{{t "transweb.source-code"}}</a>
+    {{/if}}
+    <span class="fleetbase-attribution-separator" aria-hidden="true">·</span>
+    <button type="button" class="fleetbase-attribution-legal-link" {{on "click" this.openLegalNotice}}>
+        {{t "transweb.legal"}}
+    </button>
+</div>

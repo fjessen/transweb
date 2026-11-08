@@ -33,7 +33,8 @@ export function initialize(appInstance) {
                 icon: 'newspaper',
                 component: 'fleetbase-blog',
                 grid_options: { w: 7, h: 9, minW: 7, minH: 9 },
-                default: true,
+                // Transweb: upstream news is opt-in, not on every new dashboard.
+                default: false,
             }),
             new Widget({
                 id: 'fleetbase-github-card',
@@ -42,7 +43,7 @@ export function initialize(appInstance) {
                 icon: faGithub,
                 component: 'github-card',
                 grid_options: { w: 5, h: 9, minW: 5, minH: 9 },
-                default: true,
+                default: false,
             }),
         ];
 

@@ -39,8 +39,14 @@ RUN pnpm install --frozen-lockfile
 # Copy the console directory contents into the container at /console
 COPY . .
 
+# Transweb: derive Mozambican Portuguese (pt-mz) for every installed extension engine
+RUN node scripts/transweb/make-pt-mz.js --node-modules node_modules
+
 # Build the application
 RUN pnpm build --environment $ENVIRONMENT
+
+# Transweb: remap the upstream blue palette to Transweb teal in all emitted CSS
+RUN node scripts/transweb/recolor-css.js dist
 
 # ---- Serve Stage ----
 FROM nginx:alpine

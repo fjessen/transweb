@@ -1,3 +1,5 @@
+# Transweb — Fleetbase distribution for Mozambique (see NOTICE-TRANSWEB.md).
+# Development compose: see branding/ROADMAP-MOCAMBIQUE.md §Segurança before exposing it publicly.
 services:
   cache:
     image: redis:4-alpine
@@ -39,7 +41,10 @@ services:
       # For development, use: SOCKETCLUSTER_OPTIONS: '{"origins":"http://localhost:*"}'
 
   scheduler:
-    image: fleetbase/fleetbase-api:latest
+    image: transweb/transweb-api:local
+    build:
+      context: .
+      dockerfile: docker/transweb-api/Dockerfile
     command: ["go-crond", "--verbose", "root:./crontab"]
     restart: unless-stopped
     environment:
@@ -49,12 +54,18 @@ services:
       CACHE_PATH: /fleetbase/api/storage/framework/cache
       CACHE_URL: tcp://cache
       REDIS_URL: tcp://cache
+      APP_NAME: Transweb
+      MAIL_FROM_NAME: Transweb
+      TRANSWEB_CONSOLE_URL: http://localhost:4200
     depends_on:
       - database
       - cache
 
   queue:
-    image: fleetbase/fleetbase-api:latest
+    image: transweb/transweb-api:local
+    build:
+      context: .
+      dockerfile: docker/transweb-api/Dockerfile
     command: ["php", "artisan", "queue:work"]
     restart: unless-stopped
     healthcheck:
@@ -69,11 +80,15 @@ services:
       CACHE_PATH: /fleetbase/api/storage/framework/cache
       CACHE_URL: tcp://cache
       REDIS_URL: tcp://cache
+      APP_NAME: Transweb
+      MAIL_FROM_NAME: Transweb
+      TRANSWEB_CONSOLE_URL: http://localhost:4200
     depends_on:
       - database
       - cache
 
   console:
+    image: transweb/transweb-console:local
     restart: unless-stopped
     build:
       context: ./console
@@ -87,7 +102,10 @@ services:
 
   application:
     restart: unless-stopped
-    image: fleetbase/fleetbase-api:latest
+    image: transweb/transweb-api:local
+    build:
+      context: .
+      dockerfile: docker/transweb-api/Dockerfile
     volumes:
       - ./api/.env:/fleetbase/api/.env
       - ./api/storage/app:/fleetbase/api/storage/app
@@ -101,8 +119,10 @@ services:
       REDIS_URL: tcp://cache
       SESSION_DOMAIN: localhost
       BROADCAST_DRIVER: socketcluster
-      MAIL_FROM_NAME: Fleetbase
-      APP_NAME: Fleetbase
+      MAIL_FROM_NAME: Transweb
+      APP_NAME: Transweb
+      # Public console address; used for default logo/icon URLs in emails (set to your domain in production)
+      TRANSWEB_CONSOLE_URL: http://localhost:4200
       LOG_CHANNEL: daily
       REGISTRY_HOST: https://registry.fleetbase.io
       REGISTRY_PREINSTALLED_EXTENSIONS: "true"

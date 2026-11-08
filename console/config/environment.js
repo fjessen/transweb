@@ -28,6 +28,18 @@ module.exports = function (environment) {
             disableFleetbaseAttribution: toBoolean(getenv('DISABLE_FLEETBASE_ATTRIBUTION', false)),
         },
 
+        // Transweb distribution settings (Mozambique defaults). All overridable at build time.
+        transweb: {
+            name: getenv('TRANSWEB_NAME', 'Transweb'),
+            companyName: getenv('TRANSWEB_COMPANY_NAME', 'Komuniki Corp, Lda.'),
+            // AGPL-3.0 §13: network users must be offered the source of this modified version.
+            sourceUrl: getenv('TRANSWEB_SOURCE_URL', 'https://github.com/fleetbase/fleetbase'),
+            defaultLocale: getenv('TRANSWEB_DEFAULT_LOCALE', 'pt-mz'),
+            defaultCountry: getenv('TRANSWEB_DEFAULT_COUNTRY', 'MZ'),
+            defaultCurrency: getenv('TRANSWEB_DEFAULT_CURRENCY', 'MZN'),
+            defaultTimezone: getenv('TRANSWEB_DEFAULT_TIMEZONE', 'Africa/Maputo'),
+        },
+
         API: {
             host: fixApiHost(getenv('API_HOST'), toBoolean(getenv('API_SECURE'))),
             namespace: getenv('API_NAMESPACE', 'int/v1'),

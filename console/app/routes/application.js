@@ -4,6 +4,7 @@ import { action } from '@ember/object';
 import isElectron from '@fleetbase/ember-core/utils/is-electron';
 import pathToRoute from '@fleetbase/ember-core/utils/path-to-route';
 import removeBootLoader from '../utils/remove-boot-loader';
+import config from '@fleetbase/console/config/environment';
 
 export default class ApplicationRoute extends Route {
     @service('universe/hook-service') hookService;
@@ -115,7 +116,9 @@ export default class ApplicationRoute extends Route {
      * the `setLocale` method of the `intl` service with the retrieved locale.
      */
     initializeLocale() {
-        const locale = this.currentUser.getOption('locale', 'en-US');
-        this.intl.setLocale([locale]);
+        // Transweb: default to Mozambican Portuguese unless the user picked a language.
+        const fallback = config.transweb?.defaultLocale ?? 'en-US';
+        const locale = this.currentUser.getOption('locale', fallback);
+        this.intl.setLocale([locale, fallback, 'en-us']);
     }
 }

@@ -243,3 +243,46 @@ body[data-theme='dark'] .console-dashboard-title h1 {
         padding: 1rem;
     }
 }
+
+/* ---------------------------------------------------------------------------------------------
+ * Transweb brand layer
+ * Primary colour remapping happens at build time (scripts/transweb/recolor-css.js); this block
+ * only adds brand-specific touches.
+ * ------------------------------------------------------------------------------------------- */
+:root {
+    --transweb-navy: #0b2a3c;
+    --transweb-navy-light: #0f3a52;
+    --transweb-teal: #087d7a;
+    --transweb-teal-light: #3fc1b8;
+    --transweb-cyan: #6fe7f2;
+    --transweb-amber: #f2a900;
+}
+
+#boot-loader.overloader {
+    background-color: var(--transweb-navy);
+    color: #ffffff;
+}
+
+#boot-loader.overloader > .loader-container {
+    background: rgba(15, 58, 82, 0.6);
+    border-color: rgba(63, 193, 184, 0.35);
+}
+
+#boot-loader .fleetbase-loader {
+    border-color: rgba(63, 193, 184, 0.8);
+    border-bottom-color: var(--transweb-amber);
+}
+
+.transweb-attribution .transweb-attribution-brand {
+    font-weight: 600;
+}
+
+.transweb-attribution a:hover,
+.transweb-attribution button:hover {
+    color: var(--transweb-teal);
+}
+
+body[data-theme='dark'] .transweb-attribution a:hover,
+body[data-theme='dark'] .transweb-attribution button:hover {
+    color: var(--transweb-teal-light);
+}
