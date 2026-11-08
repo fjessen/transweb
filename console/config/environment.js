@@ -33,7 +33,7 @@ module.exports = function (environment) {
             name: getenv('TRANSWEB_NAME', 'Transweb'),
             companyName: getenv('TRANSWEB_COMPANY_NAME', 'Komuniki Corp, Lda.'),
             // AGPL-3.0 §13: network users must be offered the source of this modified version.
-            sourceUrl: getenv('TRANSWEB_SOURCE_URL', 'https://github.com/fleetbase/fleetbase'),
+            sourceUrl: getenv('TRANSWEB_SOURCE_URL', 'https://github.com/fjessen/transweb'),
             defaultLocale: getenv('TRANSWEB_DEFAULT_LOCALE', 'pt-mz'),
             defaultCountry: getenv('TRANSWEB_DEFAULT_COUNTRY', 'MZ'),
             defaultCurrency: getenv('TRANSWEB_DEFAULT_CURRENCY', 'MZN'),

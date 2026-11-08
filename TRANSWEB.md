@@ -70,7 +70,7 @@ Console (build-time env, read in `console/config/environment.js`):
 | `TRANSWEB_DEFAULT_CURRENCY` | `MZN` | Currency picker fallback |
 | `TRANSWEB_DEFAULT_TIMEZONE` | `Africa/Maputo` | Reserved for org defaults |
 | `TRANSWEB_COMPANY_NAME` | `Komuniki Corp, Lda.` | Footer copyright holder |
-| `TRANSWEB_SOURCE_URL` | upstream Fleetbase repo | **Set to your public Transweb repo** (AGPL §13) |
+| `TRANSWEB_SOURCE_URL` | `https://github.com/fjessen/transweb` | Public source link in the footer (AGPL §13) |
 
 API (compose environment): `APP_NAME`, `MAIL_FROM_NAME`, `TRANSWEB_CONSOLE_URL` (public console URL, used
 for logo/icon in emails), optionally `TRANSWEB_LOGO_URL` / `TRANSWEB_ICON_URL`.
@@ -89,7 +89,7 @@ Edit `console/scripts/transweb/pt-mz.overrides.yaml` for hand translations, then
 
 ## 3. Upgrading upstream Fleetbase
 
-1. `git fetch upstream --tags && git merge vX.Y.Z` into `transweb` (conflicts are mostly in
+1. `git fetch upstream --tags && git merge vX.Y.Z` into `transweb` (`upstream` = fleetbase/fleetbase, `origin` = fjessen/transweb) (conflicts are mostly in
    `console/translations/*.yaml`, `docker-compose.yml`, `console/Dockerfile`).
 2. Pick the matching API image digest (`docker pull fleetbase/fleetbase-api:<tag>`) and update
    `BASE_IMAGE` in `docker/transweb-api/Dockerfile`. Console and API versions must move together.
@@ -108,8 +108,8 @@ Ordered by impact. ✅ = done in this branch.
 
 ### A. Foundation (now)
 1. ✅ Brand, pt-MZ, MZ/MZN defaults.
-2. **Publish the Transweb source** (GitHub/GitLab) and set `TRANSWEB_SOURCE_URL` — licence requirement
-   before giving anyone outside your company access.
+2. ✅ Source published at https://github.com/fjessen/transweb and linked from the footer. Push every
+   change you deploy (licence requirement).
 3. **Fix the stack's health**: at the time of the rebrand the `queue` container was stopped (exit 137,
    likely OOM-killed) — so emails, SMS, webhooks and notifications were not processing — and
    `scheduler` was unhealthy. Give Docker more memory, restart `queue`, check
