@@ -1,0 +1,85 @@
+# Transweb production overrides. Used on the server together with docker-compose.yml:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# (deploy/prod.env.example sets COMPOSE_FILE so plain `docker compose` does this automatically.)
+#
+# Values like ${APP_DOMAIN} come from the project-root `.env` file (copy deploy/prod.env.example).
+# Needs Docker Compose >= 2.24 for `!reset`.
+
+x-api-env: &api-env
+  ENVIRONMENT: production
+  APP_ENV: production
+  APP_DEBUG: "false"
+  LOG_LEVEL: warning
+  APP_URL: https://${API_DOMAIN}
+  CONSOLE_HOST: https://${APP_DOMAIN}
+  CONSOLE_SECURE: "true"
+  FRONTEND_HOSTS: https://${APP_DOMAIN}
+  SESSION_DOMAIN: ${APP_DOMAIN}
+  SESSION_SECURE_COOKIE: "true"
+  SANCTUM_STATEFUL_DOMAINS: ${APP_DOMAIN}
+  TRANSWEB_CONSOLE_URL: https://${APP_DOMAIN}
+  DATABASE_URL: mysql://transweb:${DB_PASSWORD}@database/fleetbase
+  BROADCAST_DRIVER: socketcluster
+  OSRM_HOST: ${OSRM_HOST:-https://router.project-osrm.org}
+
+services:
+  database:
+    ports: !reset []
+    environment: !override
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?set DB_ROOT_PASSWORD in .env}
+      MYSQL_DATABASE: fleetbase
+      TRANSWEB_DB_PASSWORD: ${DB_PASSWORD:?set DB_PASSWORD in .env}
+    volumes:
+      # Creates the `transweb` user (grants on fleetbase*) the first time the volume is initialised
+      - ./docker/database-init/:/docker-entrypoint-initdb.d/
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+
+  socket:
+    environment:
+      SOCKETCLUSTER_OPTIONS: '{"origins":"https://${APP_DOMAIN}:*,wss://${APP_DOMAIN}:*,https://${API_DOMAIN}:*,wss://${API_DOMAIN}:*"}'
+    ports: !reset []
+
+  application:
+    environment: *api-env
+
+  queue:
+    environment: *api-env
+
+  scheduler:
+    environment: *api-env
+
+  console:
+    build:
+      args:
+        ENVIRONMENT: production
+    ports: !reset []
+
+  httpd:
+    ports: !reset []
+
+  # Public entry point: HTTPS (Let's Encrypt) for the console and the API, WebSocket proxy for SocketCluster
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN}
+      API_DOMAIN: ${API_DOMAIN}
+      OSRM_HOST: ${OSRM_HOST:-https://router.project-osrm.org}
+      ACME_EMAIL: ${ACME_EMAIL}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - console
+      - httpd
+      - socket
+
+volumes:
+  caddy_data:
+  caddy_config:

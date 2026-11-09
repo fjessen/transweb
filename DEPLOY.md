@@ -1,6 +1,32 @@
 # Deploying Transweb to a server
 
-Status: **pre-deployment checklist** (2026-11-09). Nothing here has been applied to a server yet.
+Status (2026-11-09): **decided and scripted, not yet run.** No server exists yet.
+
+**Decisions:** Google Cloud Compute Engine in **europe-west1** (Belgium), VM `e2-standard-2` (2 vCPU, 8 GB),
+no registered domain yet, so the hostnames use **sslip.io** on the VM's static IP
+(`app.<ip-with-dashes>.sslip.io`, `api.<ip-with-dashes>.sslip.io`), with Let's Encrypt HTTPS.
+Swap in a real domain later by editing `APP_DOMAIN`/`API_DOMAIN` in the server's `.env`.
+
+## 0. How to deploy (scripts in `deploy/`)
+| Step | Run | Where |
+|---|---|---|
+| 1 | `gcloud auth login` then create/choose a project with billing enabled | your PC |
+| 2 | `PROJECT_ID=<id> deploy/gcp/create-vm.sh` (static IP, firewall 80/443, VM, backup bucket) | your PC (Git Bash) |
+| 3 | `PROJECT_ID=<id> ACME_EMAIL=<email> deploy/gcp/migrate-from-local.sh` | your PC (Git Bash) |
+
+Step 3 sets up the server (`deploy/server-setup.sh`: Docker, swap, clone, `.env` with generated DB
+passwords), copies `api/.env` (same `APP_KEY`), uploads and a fresh dump of the local database, builds the
+images on the server, restores, starts everything, and installs the nightly backup (`deploy/backup.sh`,
+02:30 UTC, 14 days on disk + 30 days in Cloud Storage). The local install is only read, never changed.
+
+Production differences live in `docker-compose.prod.yml` (selected by `COMPOSE_FILE` in the server's
+`.env`): Caddy front end on 80/443 (`deploy/Caddyfile`, serves the console's runtime config too),
+no published MySQL/socket/httpd ports, MySQL root password + `transweb` app user
+(`docker/database-init/`), `APP_ENV=production`, `APP_DEBUG=false`, secure cookies, SocketCluster origins.
+
+**Cost** (estimate, check the GCP pricing calculator): e2-standard-2 in europe-west1 is about US$50/month on
+demand, plus disk (60 GB balanced, about US$6), static IP, egress and a few cents of backup storage.
+
 
 ---
 

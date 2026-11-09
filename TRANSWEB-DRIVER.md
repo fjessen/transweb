@@ -1,6 +1,19 @@
 # TranswebDriver: rebranding the Fleetbase Navigator app
 
-Status: **analysis and plan** (2026-11-09). No code changes have been made to the app yet.
+Status (2026-11-09): **Phase 0 and Phase 1 done, Phase 2 started.** Android only for now.
+
+- Code: `C:\Users\felne\TransWeb-stack\transweb-driver`, branch `transweb` (moved out of OneDrive;
+  remote `upstream` = fleetbase/navigator-app). Not yet published on GitHub.
+- App ID: **`mz.co.komuniki.transweb.driver`** (Android `applicationId`; the internal Kotlin namespace stays
+  `io.fleetbase.navigator`, which users and Google Play never see and keeps upstream merges simple).
+- Done: name "Transweb Driver", scheme `transwebdriver`, Transweb icons/splash/notification icon/Play Store
+  graphics, `transweb` teal/navy theme, `pt` translation of all 70 keys (default language), Maputo
+  coordinates, location disclosure and visible texts say Transweb, legal links from `PRIVACY_POLICY_URL` /
+  `TERMS_URL`.
+- Still open: hard-coded English texts in screens (not yet in translation files), own Firebase project,
+  Transistorsoft licence, Google Maps key, privacy policy page, release keystore, API URL once the server is live.
+  The local `google-services.json` has a placeholder entry for the new app ID so debug builds work.
+  Push notifications won't work until it is replaced.
 
 ## 1. What is there today
 `C:\Users\felne\OneDrive\Documents\TransWeb\navigator-app` is a clone of
@@ -67,9 +80,8 @@ strings in `android/.../strings.xml`, arm64-only Android build, Gradle timeouts,
 17. Privacy policy URL (required by both stores for location apps).
 
 ## 3. Decisions needed
-- **App ID**, permanent: e.g. `mz.co.transweb.driver` (if you own `transweb.co.mz`) or
-  `mz.co.komuniki.transwebdriver`.
+- ~~App ID~~: decided, `mz.co.komuniki.transweb.driver`.
 - Store name: "Transweb Driver" (display) / `TranswebDriver` (code/project name)?
-- Android only at first, or iOS too?
+- ~~Platforms~~: decided, Android only for now.
 - Driver login method: phone + SMS code only, or also email/Google/Apple?
 - Budget for the Transistorsoft licence (or accept foreground-only tracking).

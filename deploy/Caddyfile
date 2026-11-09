@@ -1,0 +1,50 @@
+# Transweb production front end (used by docker-compose.prod.yml).
+# Caddy obtains and renews Let's Encrypt certificates for both hostnames automatically.
+{
+	email {$ACME_EMAIL}
+}
+
+# Console
+{$APP_DOMAIN} {
+	encode zstd gzip
+
+	# Runtime config for the console: no rebuild needed when the domain changes
+	handle /fleetbase.config.json {
+		header Content-Type application/json
+		header Cache-Control "no-cache"
+		respond `{"API_HOST":"https://{$API_DOMAIN}","SOCKETCLUSTER_HOST":"{$API_DOMAIN}","SOCKETCLUSTER_PORT":"443","SOCKETCLUSTER_SECURE":"true","SOCKETCLUSTER_PATH":"/socketcluster/","OSRM_HOST":"{$OSRM_HOST}"}` 200
+	}
+
+	handle {
+		reverse_proxy console:4200
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+}
+
+# API + real-time socket
+{$API_DOMAIN} {
+	encode zstd gzip
+	request_body {
+		max_size 600MB
+	}
+
+	handle /socketcluster/* {
+		reverse_proxy socket:8000
+	}
+
+	handle {
+		reverse_proxy httpd:80
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		-Server
+	}
+}
