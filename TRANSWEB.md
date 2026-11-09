@@ -5,7 +5,8 @@ and adapted for logistics operators in **Mozambique**. This branch (`transweb`) 
 **v0.7.63**, matching the API image the installation runs (core-api 1.6.62, fleetops 0.6.68).
 
 See also: [`NOTICE-TRANSWEB.md`](NOTICE-TRANSWEB.md) (licence obligations) and
-[`branding/ROADMAP-MOCAMBIQUE.md`](branding/ROADMAP-MOCAMBIQUE.md) (original brand-kit roadmap, PT).
+[`branding/ROADMAP-MOCAMBIQUE.md`](branding/ROADMAP-MOCAMBIQUE.md) (original brand-kit roadmap, PT),
+[`DEPLOY.md`](DEPLOY.md) (server deployment checklist) and [`TRANSWEB-DRIVER.md`](TRANSWEB-DRIVER.md) (driver app plan).
 
 ---
 
@@ -160,8 +161,8 @@ Ordered by impact. ✅ = done in this branch.
     name; this needs per-locale templates in core-api.
 
 ### E. Field operations
-14. **Driver app** (`navigator-app` in your install folder): rebrand with the same kit, add offline
-    queueing / low-data mode, pt-MZ.
+14. **Driver app → TranswebDriver**: plan in [`TRANSWEB-DRIVER.md`](TRANSWEB-DRIVER.md) (new app ID,
+    brand kit, pt-MZ, own Firebase, Transistorsoft licence, low-data mode).
 15. Proof of delivery: photo + signature + OTP by SMS/WhatsApp; *guia de remessa* document template.
 16. Long-haul corridors (Maputo–Beira–Nacala, Beira corridor) as route templates for freight customers.
 
