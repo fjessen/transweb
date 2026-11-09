@@ -60,6 +60,18 @@ docker compose up -d
 ```
 Console: http://localhost:4200 · API: http://localhost:8000
 
+### Where it runs
+Keep the install folder **outside OneDrive** (or any synced folder). The compose project is pinned to
+`name: fleetbase`, and MySQL stores its data in the Docker volume `fleetbase_mysql_data`.
+
+Backup / restore:
+```bash
+docker exec fleetbase-database-1 mysqldump --single-transaction --routines --triggers --events \
+  --hex-blob --set-gtid-purged=OFF --databases fleetbase fleetbase_sandbox fleetbase_storefront > backup.sql
+docker exec -i fleetbase-database-1 mysql < backup.sql
+```
+Never `docker compose down -v`: `-v` deletes the database volume.
+
 ### Configuration
 Console (build-time env, read in `console/config/environment.js`):
 
@@ -116,8 +128,12 @@ Ordered by impact. ✅ = done in this branch.
    `docker compose logs queue scheduler`.
 4. **Production hardening** (the compose file is a dev setup): MySQL password + no published 3306,
    `APP_DEBUG=false`, `ENVIRONMENT=production`, real domain + HTTPS (Caddyfile included),
-   `SESSION_DOMAIN`, SocketCluster origins/auth, nightly DB backups tested by restore, move the stack
-   out of OneDrive (sync + bind-mounted MySQL data is a corruption risk).
+   `SESSION_DOMAIN`, SocketCluster origins/auth, nightly DB backups tested by restore.
+   ✅ MySQL data now lives in the named Docker volume `fleetbase_mysql_data` (not a bind mount), and the
+   install was moved out of OneDrive (see §2 "Where it runs").
+   **Hardware**: the current host runs Docker on a 5400 rpm laptop hard disk; under MySQL's small
+   random writes it measured 230–500 ms per I/O (an SSD does <1 ms). This, not the code, is what makes
+   the API time out and the queue/scheduler stall. Run Transweb on an SSD (or a small VPS) before real use.
 
 ### B. Local infrastructure & data
 5. **Self-hosted routing**: OSRM (or Valhalla — the API already ships `valhalla-api`/`vroom-api`) on the
