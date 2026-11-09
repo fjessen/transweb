@@ -1,5 +1,7 @@
 # Transweb — Fleetbase distribution for Mozambique (see NOTICE-TRANSWEB.md).
 # Development compose: see branding/ROADMAP-MOCAMBIQUE.md §Segurança before exposing it publicly.
+name: fleetbase
+
 services:
   cache:
     image: redis:4-alpine
@@ -17,7 +19,8 @@ services:
       - "3306:3306"
     volumes:
       - "./docker/database/:/docker-entrypoint-initdb.d/"
-      - "./docker/database/mysql:/var/lib/mysql"
+      # Named volume (lives inside Docker's own disk): far faster and safer than a Windows/OneDrive bind mount
+      - "mysql_data:/var/lib/mysql"
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: "fleetbase"
@@ -141,3 +144,6 @@ services:
       - "8000:80"
     depends_on:
       - application
+
+volumes:
+  mysql_data:
