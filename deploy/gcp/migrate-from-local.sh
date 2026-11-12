@@ -2,7 +2,7 @@
 # Moves the running local Transweb install to the Google Cloud VM made by create-vm.sh.
 # Run from your PC (Git Bash), from the dev repo root:
 #
-#   PROJECT_ID=transweb-prod ZONE=europe-west1-b ACME_EMAIL=you@example.com deploy/gcp/migrate-from-local.sh
+#   PROJECT_ID=transweb-prod ZONE=africa-south1-b ACME_EMAIL=you@example.com deploy/gcp/migrate-from-local.sh
 #
 # Steps: server setup -> copy api/.env (APP_KEY!), uploads and a fresh database dump -> build images
 # on the server -> restore the database -> start everything -> install the nightly backup.
@@ -10,7 +10,7 @@
 set -euo pipefail
 
 PROJECT_ID="${PROJECT_ID:?set PROJECT_ID}"
-ZONE="${ZONE:-europe-west1-b}"
+ZONE="${ZONE:-africa-south1-b}"
 VM_NAME="${VM_NAME:-transweb-1}"
 ACME_EMAIL="${ACME_EMAIL:?set ACME_EMAIL (Let's Encrypt notices)}"
 LOCAL_INSTALL="${LOCAL_INSTALL:-/c/Users/felne/TransWeb-stack/fleetbase}"

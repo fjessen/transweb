@@ -9,7 +9,7 @@
 set -euo pipefail
 
 PROJECT_ID="${PROJECT_ID:?set PROJECT_ID (the Google Cloud project id)}"
-REGION="${REGION:-europe-west1}"            # Belgium
+REGION="${REGION:-africa-south1}"           # Johannesburg (closest to Maputo, same price as Belgium)
 ZONE="${ZONE:-${REGION}-b}"
 VM_NAME="${VM_NAME:-transweb-1}"
 MACHINE_TYPE="${MACHINE_TYPE:-e2-standard-2}" # 2 vCPU, 8 GB RAM (4 GB is too tight for the console build)

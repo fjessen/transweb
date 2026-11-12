@@ -19,6 +19,9 @@ COPY --chown=www-data:www-data docker/transweb-api/frankenphp-worker.php /fleetb
 # Transweb branding defaults (overrides the hardcoded Fleetbase S3 logo URLs in core-api)
 COPY api/config/fleetbase.php /fleetbase/api/config/fleetbase.php
 
+# Third-party service settings, including the textbee SMS gateway (services.sms.providers.custom_http)
+COPY api/config/services.php /fleetbase/api/config/services.php
+
 LABEL org.opencontainers.image.title="transweb-api" \
       org.opencontainers.image.description="Transweb (Fleetbase distribution for Mozambique) API" \
       org.opencontainers.image.licenses="AGPL-3.0-or-later"

@@ -53,5 +53,32 @@ return [
     'google_maps' => [
         'locale' => env('GOOGLE_MAPS_LOCALE', 'us'),
         'api_key' => env('GOOGLE_MAPS_API_KEY'),
-    ]
+    ],
+
+    /*
+    | SMS through the "custom_http" provider of core-api's SmsService, shaped for textbee
+    | (https://textbee.dev, an Android phone used as the SMS gateway). Enable it with
+    | SMS_DEFAULT_PROVIDER=custom_http and CUSTOM_HTTP_SMS_AUTH_TOKEN=<textbee API key>.
+    | For a self-hosted textbee, point CUSTOM_HTTP_SMS_URL at your own server.
+    */
+    'sms' => [
+        'providers' => [
+            'custom_http' => [
+                'method' => env('CUSTOM_HTTP_SMS_METHOD', 'POST'),
+                'url' => env('CUSTOM_HTTP_SMS_URL', 'https://api.textbee.dev/api/v1/gateway/send-sms'),
+                'from' => env('CUSTOM_HTTP_SMS_FROM', ''),
+                'auth_header' => env('CUSTOM_HTTP_SMS_AUTH_HEADER', 'x-api-key'),
+                'auth_token' => env('CUSTOM_HTTP_SMS_AUTH_TOKEN', ''),
+                'headers' => [],
+                'query_params' => [],
+                'body' => [
+                    'recipients' => ['{{to}}'],
+                    'message' => '{{text}}',
+                ],
+                'message_id_path' => 'data.smsBatchId',
+                'status_path' => 'data.success',
+                'error_path' => 'error',
+            ],
+        ],
+    ],
 ];

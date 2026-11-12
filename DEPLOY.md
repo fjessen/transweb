@@ -2,7 +2,7 @@
 
 Status (2026-11-09): **decided and scripted, not yet run.** No server exists yet.
 
-**Decisions:** Google Cloud Compute Engine in **europe-west1** (Belgium), VM `e2-standard-2` (2 vCPU, 8 GB),
+**Decisions:** Google Cloud Compute Engine in **africa-south1** (Johannesburg; europe-west1 was the first choice, same price), VM `e2-standard-2` (2 vCPU, 8 GB),
 no registered domain yet, so the hostnames use **sslip.io** on the VM's static IP
 (`app.<ip-with-dashes>.sslip.io`, `api.<ip-with-dashes>.sslip.io`), with Let's Encrypt HTTPS.
 Swap in a real domain later by editing `APP_DOMAIN`/`API_DOMAIN` in the server's `.env`.
@@ -24,7 +24,7 @@ Production differences live in `docker-compose.prod.yml` (selected by `COMPOSE_F
 no published MySQL/socket/httpd ports, MySQL root password + `transweb` app user
 (`docker/database-init/`), `APP_ENV=production`, `APP_DEBUG=false`, secure cookies, SocketCluster origins.
 
-**Cost** (estimate, check the GCP pricing calculator): e2-standard-2 in europe-west1 is about US$50/month on
+**Cost** (estimate, check the GCP pricing calculator): e2-standard-2 in africa-south1 (or europe-west1, same price) is about US$54/month on
 demand, plus disk (60 GB balanced, about US$6), static IP, egress and a few cents of backup storage.
 
 
