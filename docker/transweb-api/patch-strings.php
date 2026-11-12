@@ -59,6 +59,18 @@ $patches = [
     'ai/server/src/Services/AnthropicProvider.php' => [
         ["'You are Fleetbase AI, an operations copilot inside Fleetbase.", "'You are ' . config('app.name') . ' AI, an operations copilot inside ' . config('app.name') . '."],
     ],
+
+    // Behaviour fix (not a string): OSRM routing from Mozambique. Upstream gives OSRM 1 second, which the
+    // public router (Europe) regularly exceeds from here (0.75-1.2 s measured), and then caches the failed
+    // answer for an hour, so an order's route/ETA stays on the straight-line fallback. Allow 3 s to connect
+    // and 6 s in total, and only cache or reuse answers OSRM marked "Ok".
+    'fleetops-api/server/src/Support/OSRM.php' => [
+        ['Http::timeout(1)', 'Http::connectTimeout(3)->timeout(6)', 'all'],
+        ['if (Cache::has($cacheKey)) {', "if (Cache::has(\$cacheKey) && (Cache::get(\$cacheKey)['code'] ?? null) === 'Ok') {", 'all'],
+        ['Cache::put($cacheKey, $routeData, 60 * 60);', "if ((\$routeData['code'] ?? null) === 'Ok') { Cache::put(\$cacheKey, \$routeData, 60 * 60); }"],
+        ['Cache::put($cacheKey, $data, 60 * 60);', "if ((\$data['code'] ?? null) === 'Ok') { Cache::put(\$cacheKey, \$data, 60 * 60); }", 'all'],
+        ['Cache::put($cacheKey, $result, 60 * 60);', "if ((\$result['code'] ?? null) === 'Ok') { Cache::put(\$cacheKey, \$result, 60 * 60); }", 'all'],
+    ],
 ];
 
 $failed = 0;

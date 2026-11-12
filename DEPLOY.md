@@ -89,7 +89,8 @@ automatically.
 | `REDIS_PASSWORD` | set | keep, Redis not published | |
 | `BROADCAST_DRIVER` | `log` in .env (compose overrides to `socketcluster`) | `socketcluster` | put it in .env too |
 | `MAIL_*` | Gmail SMTP with a personal address | transactional provider + `noreply@<domain>` | Gmail limits ~500 mails/day and marks bulk mail as spam. Supported: SMTP, `RESEND_KEY`, `SENDGRID_API_KEY`, `MAILGUN_*`, `POSTMARK_TOKEN`. |
-| `GOOGLE_MAPS_API_KEY` | set, but **29 characters** | valid key, restricted to your domains/IP | Google keys are normally 39 characters (`AIza…`). Verify the current value; it may be truncated. |
+| `GOOGLE_MAPS_API_KEY` | the template placeholder `YOUR_…` (not a key) | valid key, restricted to your domains/IP | Google keys are 39 characters (`AIza…`). Enable the Routes API too if Google should calculate routes/ETAs. |
+| `TRACKING_PROVIDER` / `TRACKING_PROVIDER_FALLBACKS` | `osrm` / `calculated` (set 2026-11-11) | `google_routes` / `osrm,calculated` once the Google key works | Route and ETA source for the order "Diagnostics" panel. Completed orders always show `provider_unavailable:*` + `no_tracking_provider_available`: there are no stops left to route. |
 | `IPINFO_API_KEY` | unset | optional | phone-country auto-detect; falls back to MZ |
 | `FILESYSTEM_DRIVER` | `local` | `local` on a persistent volume, or S3-compatible | Uploaded photos/POD/documents. If `local`, back up the storage volume too. |
 | `AWS_*` | empty | only if using S3 | |
