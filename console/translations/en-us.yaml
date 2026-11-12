@@ -857,3 +857,13 @@ transweb:
   source-code: Source code
   legal: Legal
   tagline: Logistics, deliveries and fleet management for Mozambique
+  legal-notice:
+    license-title: Open source license
+    license-body: "{brand} is distributed under the GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later)."
+    warranty-title: No warranty
+    warranty-body: This program is distributed without any warranty. You may copy and modify it under the terms of the AGPL-3.0-or-later.
+    upstream-title: Based on Fleetbase
+    upstream-body: "{brand} is a modified version of Fleetbase, open source software by Fleetbase Pte. Ltd., licensed under the AGPL-3.0-or-later."
+    source-link: "{brand} source code"
+    license-link: AGPL-3.0 license
+    upstream-link: Original Fleetbase source code

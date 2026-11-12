@@ -6,9 +6,10 @@ import config from '@fleetbase/console/config/environment';
 /**
  * Transweb override of ember-ui's <FleetbaseAttribution />.
  *
- * Shows the Transweb identity while keeping what AGPL-3.0 requires of a modified, network-served
- * distribution: credit to the upstream project, the upstream legal notice, and a link to the
- * corresponding source code (TRANSWEB_SOURCE_URL).
+ * Shows only the Transweb identity (no "Powered by Fleetbase" link). What AGPL-3.0 requires of a
+ * modified, network-served distribution (the upstream copyright/licence notices and an offer of the
+ * corresponding source code, TRANSWEB_SOURCE_URL) lives in the "Legal notices" dialog this footer
+ * opens: see components/modals/fleetbase-legal-notice. Keep that button.
  */
 export default class FleetbaseAttributionComponent extends Component {
     @service modalsManager;

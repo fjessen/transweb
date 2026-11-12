@@ -1,0 +1,42 @@
+{{! Transweb override of @fleetbase/ember-ui modals/fleetbase-legal-notice (see the .js file: the source offer and the Fleetbase notices are AGPL requirements). }}
+<Modal::Default @modalIsOpened={{@modalIsOpened}} @options={{@options}} @confirm={{@onConfirm}} @decline={{@onDecline}} @modalClass="flb-resource-modal">
+    <div class="modal-body-container fleetbase-legal-notice-content">
+        <div class="fleetbase-legal-notice-hero">
+            <div class="fleetbase-legal-notice-hero-main">
+                <TranswebLogo @class="h-10 w-auto" />
+            </div>
+            <span>Copyright © {{this.year}} {{this.companyName}}</span>
+        </div>
+
+        <div class="fleetbase-legal-notice-section">
+            <h4>{{t "transweb.legal-notice.license-title"}}</h4>
+            <p>{{t "transweb.legal-notice.license-body" brand=this.brand}}</p>
+        </div>
+
+        <div class="fleetbase-legal-notice-section">
+            <h4>{{t "transweb.legal-notice.warranty-title"}}</h4>
+            <p>{{t "transweb.legal-notice.warranty-body"}}</p>
+        </div>
+
+        <div class="fleetbase-legal-notice-section">
+            <h4>{{t "transweb.legal-notice.upstream-title"}}</h4>
+            <p>{{t "transweb.legal-notice.upstream-body" brand=this.brand}}</p>
+            <p>Copyright © {{this.year}} Fleetbase Pte. Ltd.</p>
+        </div>
+
+        <div class="fleetbase-legal-notice-links">
+            <a href={{this.sourceUrl}} target="_blank" rel="noopener noreferrer">
+                <FaIcon @icon="arrow-up-right-from-square" class="fleetbase-legal-notice-link-icon" />
+                <span>{{t "transweb.legal-notice.source-link" brand=this.brand}}</span>
+            </a>
+            <a href={{this.licenseUrl}} target="_blank" rel="noopener noreferrer">
+                <FaIcon @icon="arrow-up-right-from-square" class="fleetbase-legal-notice-link-icon" />
+                <span>{{t "transweb.legal-notice.license-link"}}</span>
+            </a>
+            <a href="https://github.com/fleetbase/fleetbase" target="_blank" rel="noopener noreferrer">
+                <FaIcon @icon="arrow-up-right-from-square" class="fleetbase-legal-notice-link-icon" />
+                <span>{{t "transweb.legal-notice.upstream-link"}}</span>
+            </a>
+        </div>
+    </div>
+</Modal::Default>

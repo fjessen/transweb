@@ -802,3 +802,13 @@ transweb:
   source-code: Código-fonte
   legal: Avisos legais
   tagline: Logística, entregas e gestão de frotas para Moçambique
+  legal-notice:
+    license-title: Licença de código aberto
+    license-body: "{brand} é distribuído sob a GNU Affero General Public License v3.0 ou posterior (AGPL-3.0-or-later)."
+    warranty-title: Sem garantia
+    warranty-body: Este programa é distribuído sem qualquer garantia. Pode copiá-lo e modificá-lo nos termos da AGPL-3.0-or-later.
+    upstream-title: Baseado no Fleetbase
+    upstream-body: "{brand} é uma versão modificada do Fleetbase, software de código aberto da Fleetbase Pte. Ltd., licenciado sob a AGPL-3.0-or-later."
+    source-link: "Código-fonte do {brand}"
+    license-link: Licença AGPL-3.0
+    upstream-link: Código-fonte original do Fleetbase
