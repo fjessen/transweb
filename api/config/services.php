@@ -71,10 +71,15 @@ return [
                 'auth_token' => env('CUSTOM_HTTP_SMS_AUTH_TOKEN', ''),
                 'headers' => [],
                 'query_params' => [],
-                'body' => [
+                // On a dual-SIM gateway phone, CUSTOM_HTTP_SMS_SIM_SUBSCRIPTION_ID pins the SIM that sends
+                // (textbee's simSubscriptionId, listed per device in GET /gateway/devices). Empty = phone default.
+                'body' => array_filter([
                     'recipients' => ['{{to}}'],
                     'message' => '{{text}}',
-                ],
+                    'simSubscriptionId' => is_numeric(env('CUSTOM_HTTP_SMS_SIM_SUBSCRIPTION_ID'))
+                        ? (int) env('CUSTOM_HTTP_SMS_SIM_SUBSCRIPTION_ID')
+                        : null,
+                ], fn ($value) => $value !== null),
                 'message_id_path' => 'data.smsBatchId',
                 'status_path' => 'data.success',
                 'error_path' => 'error',
