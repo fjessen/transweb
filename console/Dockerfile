@@ -42,6 +42,9 @@ COPY . .
 # Transweb: derive Mozambican Portuguese (pt-mz) for every installed extension engine
 RUN node scripts/transweb/make-pt-mz.js --node-modules node_modules
 
+# Transweb: fix upstream engine bugs (Fleet-Ops "Create a new user" email field)
+RUN node scripts/transweb/patch-engines.js --node-modules node_modules
+
 # Build the application
 RUN pnpm build --environment $ENVIRONMENT
 
